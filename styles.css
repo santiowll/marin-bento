@@ -1,5 +1,12 @@
+:root {
+  --primary-color: rgb(245, 156, 196);
+  --secondary-color: rgb(255, 135, 155);
+  --white: #fff;
+  --shadow-color: rgba(0, 0, 0, 0.7);
+}
+
 body {
-  background-color: rgb(245, 156, 196);
+  background-color: var(--primary-color);
   background-image: url(img/bg_2.png);
   margin: 0;
 }
@@ -36,11 +43,11 @@ body {
 }
 
 .grid {
-  width: 90%;
-  aspect-ratio: 2 / 1;
+  width: 100%;
+  height: 400px;
   padding: 5px;
-  background-color: rgb(255, 135, 155);
-  border: 2px solid white;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--white);
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -49,22 +56,22 @@ body {
     "card2 card3 card5"
     "card4 card4 card5";
   gap: 5px;
-  animation: light 2s infinite alternate;
+  /* animation: light 2s infinite alternate; */
 }
 
 .grid .item {
   position: relative;
-  border: 2px solid white;
+  border: 2px solid var(--white);
   border-radius: 10px;
-  transition: transform 1s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   background-size: cover;
 }
 
 .item.card-1 {
   grid-area: card1;
-  background-image: url(img/marin-eyes.jpg);
-  background-position: 30%;
+  background-image: url(img/marin-eyes-1.jpg);
+  background-position-y: 30%;
 }
 
 .item.card-2 {
@@ -93,21 +100,86 @@ body {
 
 .item:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 20px var(--white);
   z-index: 1;
+}
+
+.name-container {
+  display: flex;
+  align-items: center;
 }
 
 .name-container .name {
   font-family: "Noto Sans JP", sans-serif;
-  color: #fff;
+  color: var(--white);
   font-size: clamp(50px, 12vw, 100px);
   writing-mode: vertical-rl;
   cursor: default;
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 8px var(--shadow-color);
   text-rendering: optimizeLegibility;
 }
 
-@keyframes light {
+/* @keyframes light {
   to {
-    box-shadow: 0 0 50px 10px rgb(255, 255, 255);
+    box-shadow: 0 0 50px 10px var(--white);
+  }
+} */
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .grid {
+    width: 95%;
+    height: 400px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+      "card1"
+      "card2"
+      "card3"
+      "card4"
+      "card5";
+  }
+
+  .item.card-1 {
+    background-image: url(img/marin-eyes-1.jpg);
+    background-position-y: 30%;
+  }
+
+  .item.card-2 {
+    background-image: url(img/marin-eyes-4.jpg);
+    background-position-y: 32%;
+  }
+
+  .item.card-3 {
+    background-image: url(img/marin-eyes-3.jpg);
+    background-position-y: 33%;
+  }
+
+  .item.card-4 {
+    background-image: url(img/marin-eyes-2.jpg);
+    background-position-y: 33%;
+  }
+
+  .item.card-5 {
+    background-image: url(img/marin-eyes-5.jpg);
+    background-position-y: 30%;
+  }
+
+  .item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px var(--white);
+    z-index: 1;
+  }
+
+  .name-container {
+    height: auto;
+  }
+
+  .name-container .name {
+    writing-mode: horizontal-tb;
+    font-size: clamp(40px, 8vw, 60px);
   }
 }
